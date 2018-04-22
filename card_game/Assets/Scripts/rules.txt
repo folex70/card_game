@@ -1,0 +1,28 @@
+@folex70 
+
+rules for card_game made for ludumdare #41 in 48h:
+
+- each player starts with 2000 life points; and
+- you win if your enemy life its equals 0 points.
+
+turn system:
+
+- 30 seconds for turn;
+- select one card and throw in field; and
+- click in buttom "end turn" for imediatly ends you turn.
+
+cards type:
+
+- green cards modify field; 
+- pink cards are trap type;
+- yellow are normal cards; and
+- orange are special cards.
+
+combat
+
+- A card in field is allowed to attack a other field;
+- if has a other card in enemy field the power of cards are compared and the major cards win, 
+dealing damage equals the diference of powers in enemy fields; and
+- if the enemy field do not have cards the damage are fully for the players life ponts.
+
+Good luck and thanks for play!
