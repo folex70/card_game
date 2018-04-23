@@ -19,7 +19,7 @@ public class cardVisualEf : MonoBehaviour {
 	}
 
 	public void OnMouseDown(){
-		transform.position = new Vector3 (transform.position.x,-2.0f,transform.position.z);
+		//transform.position = new Vector3 (transform.position.x,-2.0f,transform.position.z);
 	}
 
 }
