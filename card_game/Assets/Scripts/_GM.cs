@@ -1,7 +1,7 @@
-﻿using System.Collections;
+﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using System; 
-using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +11,7 @@ public class _GM : MonoBehaviour {
 	public float enemylifePoints = 2000f;
 	public int myDeck = 0;
 	public int enemyDeck = 0;
+	public int randomGame;
 	//---- turn controllers
 	public bool		myTurn = false;
 	public float 	turnTime = 30.0f;
@@ -48,11 +49,21 @@ public class _GM : MonoBehaviour {
 	public Text uiTextTurnTime;
 	//---------
 	void Start () {
+		randomGame = UnityEngine.Random.Range (0,2);
+		print (randomGame);
 		//creating my cards
-		cards.Add (new Card (0,"Sargent", 1000,0,0,0));
-		cards.Add (new Card (1,"Specialist", 800,0,0,0));
-		cards.Add (new Card (2,"Soldier", 600,0,0,0));
-		cards.Add (new Card (3,"Soldier", 600,0,2,0));
+		if (randomGame == 0) {
+			cards.Add (new Card (0, "Sargent", 1000, 0, 0, 0));
+			cards.Add (new Card (1, "Sargent", 1000, 0, 0, 0));
+			cards.Add (new Card (2, "Soldier", 600, 0, 0, 0));
+			cards.Add (new Card (3, "Soldier", 600, 0, 2, 0));	
+		} else {
+			cards.Add (new Card (0, "Specialist", 800, 0, 0, 0));
+			cards.Add (new Card (1, "Specialist", 800, 0, 0, 0));
+			cards.Add (new Card (2, "Soldier", 600, 0, 0, 0));
+			cards.Add (new Card (3, "Soldier", 600, 0, 2, 0));	
+		}
+
 		//creating enemy cards
 		cards.Add (new Card (4,"Sargent", 1000,1,0,0));
 		cards.Add (new Card (5,"Soldier", 600,1,0,0));
@@ -120,7 +131,7 @@ public class _GM : MonoBehaviour {
 		uiTextMyLife.text		= mylifePoints.ToString();
 		uiTextEnemyDeck.text 	= enemyDeck.ToString();
 		uiTextMyDeck.text 		= myDeck.ToString();
-		uiTextTurn.text 		= myTurn ? "Turn: My" : "Turn: Enemy";
+		uiTextTurn.text 		= myTurn ? "Turn "+turns+": My" : "Turn "+turns+":Enemy";
 		uiTextTurnTime.text 	= turnTime.ToString();
 		//------------------- end turn after 30 seconds
 		if(turnTime < 0){
@@ -138,6 +149,7 @@ public class _GM : MonoBehaviour {
 					print ("status of clicked card check" + checkStatusCard (idcard));
 					if (checkStatusCard (idcard) == 1) {
 						tryAttack (0,1);//TODO randomize
+						endTurn();
 					}
 				}
 
@@ -316,7 +328,7 @@ public class _GM : MonoBehaviour {
 			gameOver = true;
 			StartCoroutine(gameOverResetGame (8));
 		}
-		if (enemylifePoints < 0){
+		if (enemylifePoints <= 0){
 			print (" you win!");
 			uiTextTurn.text 		= "You Win! Game By @folex70 made in 48h for ld#41. Thanks for play! mail me jeff7gamedev@gmail.com";
 			StartCoroutine(gameOverResetGame (10));
